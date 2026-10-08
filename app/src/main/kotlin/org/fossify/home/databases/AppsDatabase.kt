@@ -7,15 +7,24 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import org.fossify.home.helpers.Converters
 import org.fossify.home.interfaces.AppLaunchersDao
+import org.fossify.home.interfaces.DrawerFoldersDao
 import org.fossify.home.interfaces.HiddenIconsDao
 import org.fossify.home.interfaces.HomeScreenGridItemsDao
 import org.fossify.home.models.AppLauncher
+import org.fossify.home.models.DrawerFolder
+import org.fossify.home.models.DrawerFolderApp
 import org.fossify.home.models.HiddenIcon
 import org.fossify.home.models.HomeScreenGridItem
 
 @Database(
-    entities = [AppLauncher::class, HomeScreenGridItem::class, HiddenIcon::class],
-    version = 5
+    entities = [
+        AppLauncher::class,
+        HomeScreenGridItem::class,
+        HiddenIcon::class,
+        DrawerFolder::class,
+        DrawerFolderApp::class
+    ],
+    version = 6
 )
 @TypeConverters(Converters::class)
 abstract class AppsDatabase : RoomDatabase() {
@@ -25,6 +34,8 @@ abstract class AppsDatabase : RoomDatabase() {
     abstract fun HomeScreenGridItemsDao(): HomeScreenGridItemsDao
 
     abstract fun HiddenIconsDao(): HiddenIconsDao
+
+    abstract fun DrawerFoldersDao(): DrawerFoldersDao
 
     companion object {
         private var db: AppsDatabase? = null
@@ -37,7 +48,9 @@ abstract class AppsDatabase : RoomDatabase() {
                             context.applicationContext,
                             AppsDatabase::class.java,
                             "apps.db"
-                        ).build()
+                        )
+                            .addMigrations(MIGRATION_5_6)
+                            .build()
                     }
                 }
             }
