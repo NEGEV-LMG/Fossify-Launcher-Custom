@@ -1,47 +1,65 @@
-# Fossify Launcher
+# Fossify Launcher Custom
 
-<img alt="Logo" src="graphics/icon.webp" width="120" />
+Fossify Launcherをベースに、個人用途向けにカスタマイズした非公式ビルドです。
+主にFiiO M23で使用することを目的として改造しています。
 
-<a href='https://play.google.com/store/apps/details?id=org.fossify.home'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height=80/></a> <a href="https://f-droid.org/en/packages/org.fossify.home/"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on-en.svg" alt="Get it on F-Droid" height=80/></a> <a href="https://apt.izzysoft.de/fdroid/index/apk/org.fossify.home"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height=80/></a>
+## 追加・変更
 
-Fossify Launcher is your gateway to a fast, personalized, and privacy-first home screen experience.
-No ads, no bloat – just a smooth, efficient launcher designed to fit your unique style and
-preferences.
+- アプリドロワーでフォルダを作成・削除・名前変更
+- フォルダへのアプリ追加・削除
+- フォルダ内のアプリを通常のドロワー一覧から除外
+- フォルダ削除時はアプリを通常のドロワーへ戻す
+- フォルダ内アプリアイコンを使用したフォルダプレビュー
+- フォルダ内アプリの長押し操作に対応
+- フォルダ管理を設定画面から行えるように変更
 
-**🚀 LIGHTNING-FAST NAVIGATION:**  
-Navigate your device with speed and precision. Fossify Launcher is optimized to be responsive and
-fluid, giving you instant access to your favorite apps without lag.
+## このプロジェクトについて
 
-**🎨 FULL CUSTOMIZATION:**  
-Tailor your home screen with dynamic themes, custom colors, and layouts. Personalize your launcher
-to match your style with easy-to-use tools that let you create a truly unique setup.
+このプロジェクトは、Fossify Launcherをベースにした個人用のカスタムビルドです。
 
-**🖼️ COMPLETE WIDGET SUPPORT:**  
-Integrate fully resizable widgets with ease. Whether you need clocks, calendars, or other handy
-tools, Fossify Launcher ensures they blend seamlessly into your home screen design.
+公式のFossify Launcherではなく、Fossifyとは提携・承認関係にありません。
 
-**📱 NO UNWANTED CLUTTER:**  
-Effortlessly manage your apps by hiding or uninstalling them in just a few taps, keeping your home
-screen organized and clutter-free.
+主な目的は、FiiO M23で使用するために、アプリドロワーへ自分が必要としていたフォルダ機能を追加することです。
 
-**🔒 PRIVACY AND SECURITY:**  
-Your privacy is at the heart of Fossify Launcher. With no internet access and no intrusive
-permissions, your data stays with you. No tracking, no ads – just a launcher built to respect your
-privacy.
+## ライセンス
 
-**🌐 OPEN-SOURCE ASSURANCE:**  
-Fossify Launcher is built on an open-source foundation, allowing you to review our code on GitHub,
-fostering trust and a community committed to privacy.
+このプロジェクトはFossify Launcherをベースとしており、GNU General Public License v3.0の下で提供されています。
 
-Find your balance of speed, customization, and privacy with Fossify Launcher.
+詳細については [LICENSE](LICENSE) を参照してください。
 
-➡️ Explore more Fossify apps: https://www.fossify.org<br>
-➡️ Open-Source Code: https://www.github.com/FossifyOrg<br>
-➡️ Join the community on Reddit: https://www.reddit.com/r/Fossify<br>
-➡️ Connect on Telegram: https://t.me/Fossify
+元のプロジェクト:
+[Fossify Launcher](https://github.com/FossifyOrg/Launcher)
 
-<div align="center">
-<img alt="App image" src="fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png" width="30%">
-<img alt="App image" src="fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.png" width="30%">
-<img alt="App image" src="fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.png" width="30%">
-</div>
+
+---
+
+# Fossify Launcher Custom
+
+An unofficial custom build based on Fossify Launcher, primarily modified for personal use on the FiiO M23.
+
+## Added / Changed
+
+- Create, delete, and rename folders in the app drawer
+- Add and remove apps from folders
+- Apps inside folders are hidden from the regular app drawer
+- Deleting a folder returns its apps to the regular app drawer
+- Folder previews using the actual app icons of the apps inside
+- Long-press actions for apps inside folders
+- Folder management from the Settings screen
+
+## About This Project
+
+This project is a personal custom build based on Fossify Launcher.
+
+It is not an official Fossify Launcher release and is not affiliated with or endorsed by Fossify.
+
+The main purpose of this custom build is to add app drawer folder functionality that I wanted for use on my FiiO M23.
+
+## License
+
+This project is based on Fossify Launcher and is distributed under the GNU General Public License v3.0.
+
+See [LICENSE](LICENSE) for the full license text.
+
+Original project:
+[Fossify Launcher](https://github.com/FossifyOrg/Launcher)
