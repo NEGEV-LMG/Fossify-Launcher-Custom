@@ -85,6 +85,7 @@ class SettingsActivity : SimpleActivity() {
         setupHomeRowCount()
         setupHomeColumnCount()
         setupShowHomeAppLabels()
+        setupLockHomeScreenPlacement()
         setupLanguage()
         setupManageHiddenIcons()
         updateTextColors(binding.settingsHolder)
@@ -200,13 +201,23 @@ class SettingsActivity : SimpleActivity() {
 
                     val order = dao.getFolders().size
 
-                    dao.insertFolder(
+                    val folderId = dao.insertFolder(
                         DrawerFolder(
                             id = null,
                             name = name,
                             order = order
                         )
                     )
+
+                    withContext(Dispatchers.Main) {
+                        editDrawerFolder(
+                            DrawerFolder(
+                                id = folderId,
+                                name = name,
+                                order = order
+                            )
+                        )
+                    }
                 }
             }
             .setNegativeButton("キャンセル", null)
@@ -292,13 +303,13 @@ class SettingsActivity : SimpleActivity() {
                         }
                     }
                 }
-                .setPositiveButton("名前変更") { _, _ ->
-                    renameDrawerFolder(folder)
-                }
+                .setPositiveButton("完了", null)
                 .setNeutralButton("削除") { _, _ ->
                     deleteDrawerFolder(folder)
                 }
-                .setNegativeButton("閉じる", null)
+                .setNegativeButton("名前変更") { _, _ ->
+                    renameDrawerFolder(folder)
+                }
                 .show()
         }
     }
@@ -681,6 +692,19 @@ class SettingsActivity : SimpleActivity() {
 
                 config.showHomeAppLabels =
                     binding.settingsShowHomeAppLabels.isChecked
+            }
+    }
+
+    private fun setupLockHomeScreenPlacement() {
+        binding.settingsLockHomeScreenPlacement.isChecked =
+            config.lockHomeScreenPlacement
+
+        binding.settingsLockHomeScreenPlacementHolder
+            .setOnClickListener {
+                binding.settingsLockHomeScreenPlacement.toggle()
+
+                config.lockHomeScreenPlacement =
+                    binding.settingsLockHomeScreenPlacement.isChecked
             }
     }
 

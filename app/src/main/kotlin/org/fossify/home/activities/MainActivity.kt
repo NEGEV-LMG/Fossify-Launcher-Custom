@@ -115,6 +115,8 @@ class MainActivity : SimpleActivity(), FlingListener {
     private var mIgnoreYMoveEvents = false
     private var mLongPressedIcon: HomeScreenGridItem? = null
     private var mOpenPopupMenu: PopupMenu? = null
+
+    private var mPlacementLockMessageShown = false
     private var mLastTouchCoords = Pair(-1f, -1f)
     private var mActionOnCanBindWidget: ((granted: Boolean) -> Unit)? = null
     private var mActionOnWidgetConfiguredWidget: ((granted: Boolean) -> Unit)? = null
@@ -588,6 +590,7 @@ class MainActivity : SimpleActivity(), FlingListener {
                         .toInt()
 
                 mIgnoreUpEvent = false
+                mPlacementLockMessageShown = false
             }
 
             MotionEvent.ACTION_MOVE -> {
@@ -609,31 +612,37 @@ class MainActivity : SimpleActivity(), FlingListener {
 
                 if (
                     mLongPressedIcon != null &&
-                    mOpenPopupMenu != null &&
                     hasFingerMoved
                 ) {
-                    mOpenPopupMenu?.dismiss()
-                    mOpenPopupMenu = null
+                    if (config.lockHomeScreenPlacement) {
+                        if (!mPlacementLockMessageShown) {
+                            toast("ホーム画面の配置がロックされています")
+                            mPlacementLockMessageShown = true
+                        }
 
-                    binding.homeScreenGrid.root
-                        .itemDraggingStarted(
-                            mLongPressedIcon!!
-                        )
+                        mOpenPopupMenu?.dismiss()
+                        mOpenPopupMenu = null
+                    } else {
+                        if (mOpenPopupMenu != null) {
+                            mOpenPopupMenu?.dismiss()
+                            mOpenPopupMenu = null
 
-                    hideFragment(
-                        binding.allAppsFragment
-                    )
-                }
+                            binding.homeScreenGrid.root
+                                .itemDraggingStarted(
+                                    mLongPressedIcon!!
+                                )
 
-                if (
-                    mLongPressedIcon != null &&
-                    hasFingerMoved
-                ) {
-                    binding.homeScreenGrid.root
-                        .draggedItemMoved(
-                            event.x.toInt(),
-                            event.y.toInt()
-                        )
+                            hideFragment(
+                                binding.allAppsFragment
+                            )
+                        }
+
+                        binding.homeScreenGrid.root
+                            .draggedItemMoved(
+                                event.x.toInt(),
+                                event.y.toInt()
+                            )
+                    }
                 }
 
                 if (
@@ -717,6 +726,7 @@ class MainActivity : SimpleActivity(), FlingListener {
                 mTouchDownY = -1
                 mIgnoreMoveEvents = false
                 mLongPressedIcon = null
+                mPlacementLockMessageShown = false
 
                 mLastTouchCoords =
                     Pair(-1f, -1f)
@@ -1510,6 +1520,7 @@ class MainActivity : SimpleActivity(), FlingListener {
 
         binding.homeScreenPopupMenuAnchor.y =
             anchorY
+
 
         if (mOpenPopupMenu == null) {
             mOpenPopupMenu =

@@ -213,11 +213,13 @@ class AllAppsFragment(
                         event.y.toInt() -
                             touchDownY
 
+
                     shouldIntercept =
-                        distance > 0 &&
+                        distance > android.view.ViewConfiguration
+                            .get(context)
+                            .scaledTouchSlop &&
                             binding.allAppsGrid
-                                .computeVerticalScrollOffset() ==
-                            0
+                                .computeVerticalScrollOffset() == 0
 
                     if (shouldIntercept) {
                         if (
@@ -231,6 +233,8 @@ class AllAppsFragment(
                             touchDownY
                         )
 
+
+
                         touchDownY = -1
                     }
                 }
@@ -239,6 +243,8 @@ class AllAppsFragment(
 
         lastTouchCoords =
             Pair(event.x, event.y)
+
+
 
         return shouldIntercept
     }
@@ -333,35 +339,31 @@ class AllAppsFragment(
             }
 
         val items =
-            (apps + folders)
-                .sortedWith(
-                    compareBy(
-                        {
-                            when (it) {
-                                is DrawerItem.App ->
-                                    it.launcher.title
-                                        .normalizeString()
-                                        .lowercase()
-
-                                is DrawerItem.Folder ->
-                                    it.folder.name
-                                        .normalizeString()
-                                        .lowercase()
-                            }
-                        },
-                        {
-                            when (it) {
-                                is DrawerItem.App ->
-                                    it.launcher.packageName
-
-                                is DrawerItem.Folder ->
-                                    it.folder.id
-                                        ?.toString()
-                                        ?: ""
-                            }
-                        }
-                    )
+            folders.sortedWith(
+                compareBy(
+                    {
+                        it.folder.name
+                            .normalizeString()
+                            .lowercase()
+                    },
+                    {
+                        it.folder.id
+                            ?.toString()
+                            ?: ""
+                    }
                 )
+            ) + apps.sortedWith(
+                compareBy(
+                    {
+                        it.launcher.title
+                            .normalizeString()
+                            .lowercase()
+                    },
+                    {
+                        it.launcher.packageName
+                    }
+                )
+            )
 
         setupAdapter(items)
     }

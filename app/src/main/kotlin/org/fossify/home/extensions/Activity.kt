@@ -107,10 +107,15 @@ fun Activity.handleGridItemPopupMenu(
             gridItem.type == ITEM_TYPE_ICON && isOnAllAppsFragment
         menu.findItem(R.id.resize).isVisible = gridItem.type == ITEM_TYPE_WIDGET
         menu.findItem(R.id.app_info).isVisible = gridItem.type == ITEM_TYPE_ICON
-        menu.findItem(R.id.uninstall).isVisible = gridItem.type == ITEM_TYPE_ICON
-                && canAppBeUninstalled(gridItem.packageName)
-                && gridItem.packageName != packageName
-        menu.findItem(R.id.remove).isVisible = !isOnAllAppsFragment
+        menu.findItem(R.id.uninstall).isVisible =
+            gridItem.type == ITEM_TYPE_ICON &&
+                canAppBeUninstalled(gridItem.packageName) &&
+                gridItem.packageName != packageName &&
+                (!config.lockHomeScreenPlacement || isOnAllAppsFragment)
+
+        menu.findItem(R.id.remove).isVisible =
+            !isOnAllAppsFragment &&
+                !config.lockHomeScreenPlacement
 
         val launcherApps =
             applicationContext.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps

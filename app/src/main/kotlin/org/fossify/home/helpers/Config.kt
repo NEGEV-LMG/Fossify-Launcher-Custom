@@ -6,6 +6,9 @@ import org.fossify.home.R
 
 class Config(context: Context) : BaseConfig(context) {
     companion object {
+        private const val LOCK_HOME_SCREEN_PLACEMENT =
+            "lock_home_screen_placement"
+
         fun newInstance(context: Context) = Config(context)
     }
 
@@ -45,4 +48,16 @@ class Config(context: Context) : BaseConfig(context) {
     var showHomeAppLabels: Boolean
         get() = prefs.getBoolean(SHOW_HOME_APP_LABELS, true)
         set(showHomeAppLabels) = prefs.edit().putBoolean(SHOW_HOME_APP_LABELS, showHomeAppLabels).apply()
+
+    var lockHomeScreenPlacement: Boolean
+        get() = prefs.getBoolean(
+            LOCK_HOME_SCREEN_PLACEMENT,
+            false
+        )
+        set(lockHomeScreenPlacement) = prefs.edit()
+            .putBoolean(
+                LOCK_HOME_SCREEN_PLACEMENT,
+                lockHomeScreenPlacement
+            )
+            .apply()
 }

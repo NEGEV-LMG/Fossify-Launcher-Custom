@@ -321,6 +321,22 @@
                     android:text="@string/show_app_labels" />
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settings_lock_home_screen_placement_holder"
+                style="@style/SettingsHolderSwitchStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_background">
+
+                <org.fossify.commons.views.MyMaterialSwitch
+                    android:id="@+id/settings_lock_home_screen_placement"
+                    style="@style/SettingsSwitchStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lock_home_screen_placement" />
+
+            </RelativeLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
